@@ -1,2 +1,3 @@
-# PraticePhp
-just some php pratice
+# PHP 架設後台
+一個 PHP 後台系統練習.
+查詢會員功能
