@@ -1,0 +1,114 @@
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+$url: "https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1600826110756.jpg";
+$url2: "https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1662571531128.jpg";
+$url3: "https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1601349550377.jpg";
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  background-color: #f5efe5;
+}
+
+@mixin mid_position() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu_icon {
+  width: 100%;
+  max-width: 20px;
+  height: 20px;
+  @include mid_position();
+}
+
+.main_wrapper {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  @include mid_position();
+  form {
+    width: 100%;
+    max-width: 800px;
+  }
+}
+
+#username,
+#phone {
+  max-width: 1000px;
+}
+.table {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto 0;
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  padding: 0;
+  .pagination {
+    margin: 40px 0;
+    @include mid_position();
+  }
+}
+
+form {
+  margin: 40px 0 0;
+}
+
+.pic {
+  width: 100%;
+  max-width: 600px;
+  .picture {
+    height: 250px;
+    background-image: url($url);
+    background-position: 0px 10%, top;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+  .picture_two {
+    height: 250px;
+    background-image: url($url2);
+    background-position: 0px 100%, top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+  .picture_three {
+    height: 250px;
+    background-image: url($url3);
+    background-position: 0px 15%, top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+}
+
+.offcanvas-body {
+  margin: 0;
+  padding: 0;
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      @include mid_position();
+      margin-top: 20px;
+      a {
+        text-decoration: none;
+        color: #000;
+        font-size: 18px;
+        &:hover {
+          color: #0d6efd;
+        }
+      }
+    }
+  }
+}
+
+.chart {
+  width: 100%;
+  max-width: 500px;
+  margin: 40px auto;
+}

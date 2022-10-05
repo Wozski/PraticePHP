@@ -1,0 +1,78 @@
+<head>
+    <script src="./utils.js"></script>
+</head>
+<form id="customer_form" action="/php/handle_search.php">
+  <h3>搜尋系統(查詢手機得到資料)</h3>
+  <div class="mb-3">
+    <label for="name">姓名</label>
+    <input type="checkbox" id="vehicle1" name="vehicle1">
+    <div class="inputArea_name" style="display: none;">
+        <input type="username" class="form-control" id="username">
+        <div id="emailHelp" class="form-text">姓名如果有雷同,一定是錯覺.</div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="phone" class="form-label">電話</label>
+    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car" checked="true">
+    <div class="inputArea_phone">
+        <input type="phone" class="form-control" id="phone" required>
+    </div> 
+  </div>
+  <button type="submit" class="btn btn-primary" id="submit_btn">搜尋</button>
+</form>
+<script>
+    let formData = new FormData();
+    let isChecked = $("#vehicle1");
+    let isChecked_two = $("#vehicle2");
+    isChecked.click((e) => {
+        $(".inputArea_name").toggle("slow");
+    });
+    isChecked_two.click((e) => {
+        $(".inputArea_phone").toggle("slow");
+    })
+    // search All
+    fetch("./php/Alldata.php")
+    .then((response) => response.json())
+    .then((data) =>{
+        if (data) {
+            let result = data.user
+            for (let i = 0; i<result.length; i++) {
+                $(".all_respone").append(Auto_Append(result, i))
+            }
+            return;
+        }
+        alert("沒有資料");
+    })
+    .catch((err) => {
+        console.log(err, "error")
+    })
+    // search single 
+    $("#submit_btn").click((e) =>{
+        e.preventDefault();
+        let type_phone = $("#phone").val();
+        if (type_phone === "") {
+            alert("不可為空值");
+            return;
+        }
+        formData.append('phone', type_phone);
+        // select one
+        fetch("./php/handle_search.php", {
+            method: "POST",
+            body: formData
+        })
+        .then (response => {
+            return response.json();})
+        .then (text =>{
+            if (text) {
+                $(".search_respone").empty();
+                let result = text.user;
+                for (let i = 0; i<result.length; i++) {
+                    $(".search_respone").append(Auto_Append(result, i))
+                    $("#phone").val("");
+                    return;
+                }
+            }
+            alert("沒有資料");
+        })
+    })
+</script>

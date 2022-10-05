@@ -1,0 +1,115 @@
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  background-color: #f5efe5;
+}
+
+.menu_icon {
+  width: 100%;
+  max-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main_wrapper {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main_wrapper form {
+  width: 100%;
+  max-width: 800px;
+}
+
+#username,
+#phone {
+  max-width: 1000px;
+}
+
+.table {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto 0;
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  padding: 0;
+}
+.container .pagination {
+  margin: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  margin: 40px 0 0;
+}
+
+.pic {
+  width: 100%;
+  max-width: 600px;
+}
+.pic .picture {
+  height: 250px;
+  background-image: url("https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1600826110756.jpg");
+  background-position: 0px 10%, top;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.pic .picture_two {
+  height: 250px;
+  background-image: url("https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1662571531128.jpg");
+  background-position: 0px 100%, top;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.pic .picture_three {
+  height: 250px;
+  background-image: url("https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1601349550377.jpg");
+  background-position: 0px 15%, top;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.offcanvas-body {
+  margin: 0;
+  padding: 0;
+}
+.offcanvas-body ul {
+  margin: 0;
+  padding: 0;
+}
+.offcanvas-body ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.offcanvas-body ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+}
+.offcanvas-body ul li a:hover {
+  color: #0d6efd;
+}
+
+.chart {
+  width: 100%;
+  max-width: 500px;
+  margin: 40px auto;
+}/*# sourceMappingURL=index.css.map */

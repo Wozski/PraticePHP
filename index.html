@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="import" href="./index.js">
+    <title>Hello Systeam</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./utils.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="navbar"></div>
+    </nav>
+    <main>
+        <div class="pic container">
+            <div class="picture"></div>
+        </div>
+        <div class="main_wrapper">
+        </div>
+        <div class="table container">
+            <div class="chart">
+                <canvas id="myChart2"></canvas>
+            </div>
+            <div class="table_result"></div>
+            <div class="table_search"></div>
+        </div>
+    </main>
+</body>
+<script>
+    url = "./php/handle_count.php"
+     $(".navbar").load("./components/Navbar.html");
+     $(".main_wrapper").load("./components/Search_Bar.html");
+     $(".table_result").load("./components/Table_green.html");
+     $(".table_search").load("./components/Table_black.html");
+     // alldata
+     fetch(url, {
+        method: "Get",
+     })
+     .then((res)=> {
+        return res.json();
+     })
+     .then((res)=> {
+        let result = res.user
+        let total = 0;
+        let male = result[1].count;
+        let female = result[0].count;
+        let Open = result[2].count;
+        result.map((ans)=> {
+            total += Number(ans.count);
+        });
+        Doughnut(Percent(male,total),Percent(female,total),Percent(Open,total));
+     });
+
+    // let headers = {
+    //     "Content-Type": "application/json",
+    //     "Accept": "application/json",
+    // }
+</script>
+</html>

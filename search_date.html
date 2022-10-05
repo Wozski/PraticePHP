@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="import" href="./index.js">
+    <title>Hello System</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./utils.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="navbar"></div>
+    </nav>
+    <div class="pic container">
+        <div class="picture_two"></div>
+    </div>
+    <!-- 日期搜尋 -->
+    <div style="display: flex;align-items: center;justify-content: center;">
+        <form action="/php/handle_search_date.php">
+            <label for="Start">Start:</label>
+            <input type="date" id="Start" name="Start" value="2022-01-01">
+            <label for="End">End:</label>
+            <input type="date" id="End" name="End" value="">
+            <button type="submit" class="btn btn-primary" id="submit_btn">搜尋</button>
+        </form>
+    </div>
+    <div class="test">
+        <div class="chart">
+            <canvas id="myChart"></canvas>
+        </div>
+        <table class="table"></table>
+    </div>
+</body>
+<script>
+    url = "./php/Allpeople.php"
+    // import Navbar
+    $(".navbar").load("./components/Navbar.html");
+    // import Table
+    $(".table").load("./components/Table_green.html");
+    // import Lable
+    fetch(url,{
+        method:"GET",
+    }).then((res)=>{
+        return res.json();
+    }).then((res)=> {
+        let result = res.user;
+        Makelabels(result);
+    })
+    $(".btn").click((e) =>{
+        e.preventDefault();
+        let Fetchurl = "./php/handle_search_date.php";
+        let formData = new FormData();
+        let Start_date = $("#Start").val();
+        let End_date = $("#End").val();
+        // 值不能為空
+        if (Start_date === "" || End_date === "") {
+            alert("不能為空值");
+            return;
+        }
+        // 起始不能小於結束;
+        if(Date.parse(Start_date) > Date.parse(End_date)) {
+            alert("開始日期不能早於結束日期");
+            return;
+        }
+        formData.append("Start_date", Start_date);
+        formData.append("End_date", End_date);
+        fetch(Fetchurl, {
+            method: "POST",
+            body: formData,
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((res) => {
+            console.log(res);
+            let result = res.user;
+            if (res) {
+                $(".search_respone").empty();
+                if (result.length === 0) {
+                    alert("查無資料")
+                    return;
+                }
+                for (let i = 0; i < result.length; i++) {
+                    $(".search_respone").append(Auto_Append(result, i));
+                }
+                return;
+            }
+            alert("查無資料");
+        })
+        .catch((err)=>{
+            console.log("err",err)
+        })
+    });
+</script>
+</html>
